@@ -1,0 +1,185 @@
+/* Here I am defining an animation where to have an element with a beginning state of 25px wide and 0 opacity to an end state that is 475px wide and an opacity of 1*/
+/* I am using the @keyframes rule to create the animation and the from and to keywords to set the beginning and end states of the animation */
+@keyframes logo_animation {
+    from {width: 25px; opacity: 0;}
+    to {width: 475px; opacity: 1;}
+}
+
+/* Here I apply tha animation to the logo on the page and set the duration of the animation to take place over a 5 second period  */
+#logo {
+    animation: logo_animation 5s;
+}
+
+/* Here I included the Google Font Poppins and made serif the backup font.
+
+I set the background image to the conctrete_seamless.png image which is located in the images folder. 
+
+I also set the background color to #f1f1f1 as a backup. */
+
+body {
+    font-family: "Poppins", serif;
+    background-image: url("../images/concrete_seamless.png");
+    background-color: #f1f1f1;
+}
+
+/* Here I edited the css to modify all instances of the header tag element
+I organized and displayed the header elements using flex and set the direction to column and align-items to center
+This ensures all header elements are vertically centered and aligned on the page */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Here I modified the display of the .nav_links class using flex and set the direction to column. I did this to ensure the links are displayed vertically and centered on the page */
+.nav_links {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Here I am using the :visited pseudo-class to ensure that all links stay the same color even after being visited */ 
+a:visited {
+    color: blue;
+}
+
+/* Here I modified the for all header elements that are direct children (occur directly beneath) the .card class. I set the background color to #288088, added a solid 2px border using #45ADAD, 20px of padding on the top and the bottom, and 50px border-radius on the top left and right corners. */
+
+.card > header {
+    background: #288088;
+    border: solid 2px #45ADAD;
+    padding: 20px 0;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+/* I also changed the border radius for the .card class to make the corners of the card match that of the headers
+To ensure that all the .card elements are the same size, I set the flex to 1 (ensuring all elements take up the same amount of space in the flex container) and the width to 450px
+ */
+
+.card {
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    flex: 1;
+    width: 450px;
+}
+
+/* In order to vertically align and center the .pricing class, I made sure to set the display to flex as it is the container. I vertically organized them by setting the flex direction to column, and aligned them by setting the  align-items property to center */
+.pricing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Here I am styling all the img's under the gallery class using the descendent selector.
+Each img should have a solid 10px border with the color #50C7C7, a margin of 10px on all sides, as well as a width of 300px. You can see these gallery images at the bottom of the page */
+
+.gallery img {
+    border: 10px solid #50C7C7;
+    margin: 10px;
+    width: 300px;
+}
+
+/* Here I am realigning the gallery images by setting the gallery container's display to flex.
+Then I make sure to set flex-wrap to wrap, ensuring that flex items will not be forced into one line and instead can wrap onto or take up multiple lines of space. This is why they are stacked. Finally by setting justify-content to center, they are aligned to the center of the page instead of left-aligned (like they would be by default) */
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Here I am setting a breakpoint at a minimum width of 900px so that when a display reaches 900px or above, the display will change according to the new code in the media query. */
+
+@media screen and (min-width: 900px) {
+    /* Here I am realigning all header elements to be horizontally aligned instead of vertically aligned by setting flex-direction to row. This sets the logo and nav_links side-by-side instead of on top of one another. Then I made sure to separate these elements so the logo is aligned all the way to the left of their containers (as well as all the prices of the packages) and the nav items are on the right (using space-between) */
+
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    /* Here I made sure the nav_links container itself was also set to row so that the links were next to each other instead of stacked */
+
+    .nav_links {
+        flex-direction: row;
+    }
+
+    /* For this size I want the .card elements in the .pricing container to be aligned horitzontally, so I changed the flex-direction of the .pricing container to row 
+    I also added justify-content: center to ensure the flex items were centered in the flex container/the page */
+
+    .pricing {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    /* I  set the width of the .card elements to 275px using the flex property so that they are smaller and fit better on the page
+    The first two 0s are for the grow and shrink properties (set to 0 as they should neither shrink nor grow), and the 275px references the fixed width */
+
+    .card {
+        flex: 0 0 275px;
+    }
+
+    /* I set the first header element to be sticky so that it stays at the top of the page when scrolling. I also made sure to exclude all header elements that were descendants of the main class using the :not() pseudo-class.
+    I did this + z-index to ensure that the top header is always visible */
+
+    header:not(main header){
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+}
+
+/* I am putting in an option ot disable the animation for users who prefer reduced motion. This is done using a media query*/
+
+@media (prefers-reduced-motion: reduce) {
+    #logo {
+        animation: none;
+    }
+}
+
+/* Here I am setting a media query to customize the styling if someone wants to print the page */
+
+@media print and (orientation: portrait) {
+    /* first I am changing the default font for print to Arial with a backup of Helvetica and removing the background image*/
+
+    body {
+        font-family: Arial, Helvetica;
+        background-image: none;
+    }
+
+    /* I am setting the display of the nav_links to flex and the direction to row so that the nav_links are side-by-side and spaced evenly instead of on top of one another */
+    /* I made the nav element's width 100% so that the justify-content property would work correctly. Specifying the width of the nav element creates a fixed width for the container, allowing the items be distributed within it more predictably */
+    nav {
+        width: 100%;
+    }
+
+    .nav_links {
+        justify-content: space-around;
+        flex-direction: row;
+    }
+
+    /* I am setting the display of the pricing class so that all the .card elements align at the bottom. I also set the direction to row so that the card elements are horizontally aligned instead of vertical */
+    .pricing {
+        flex-direction: row;
+        align-items: flex-end;
+    }
+
+    /* I am giving the card elements a solid 2px border of the color #45ADDD
+    Additionally I've added a flex-basis (or starting width) of 325px */
+
+    .card {
+        border: solid 2px #45ADDD;
+        flex-basis: 325px;
+    }
+
+    /* I am hiding the gallery header and images so that they do not print */
+    #gallery, .gallery {
+        display: none;
+    }
+
+    /* Here I am adding the thumbs up emoji after the second list element in each .card class. */
+    .card li:nth-child(2)::after {
+        content: "\1F44D";
+    }
+
+
+}
